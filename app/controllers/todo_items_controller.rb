@@ -1,10 +1,10 @@
 class TodoItemsController < ApplicationController
 
   before_action :set_todo_list
-  before_action :todo_item_params
+  before_action :todo_item_params, except: [:create]
 
 
-  def craate
+  def create
     @todo_item = @todo_list.todo_items.create(todo_item_params)
     redirect_to @todo_list
   end
@@ -16,7 +16,7 @@ class TodoItemsController < ApplicationController
   end
 
   def todo_item_params
-    require.params(:todo_items).permit(:content)
+    params[:todo_item].permit(:content)
   end
 
 end
